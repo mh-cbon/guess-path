@@ -16,7 +16,7 @@ The resolution is,
 - test for a workspace path with runtime values `/runtimepath/github.com/you/yourpackage/`.
 
 The return value is
-- exactly `TheStaticValueForBuild`, if non empty
+- exactly `TheStaticBuildValue`, if non empty
 - concatenation of the matched path and the relative path to the resources `okpath/your/resources/`
 - empty when no path matched
 
@@ -27,11 +27,11 @@ import (
   "github.com/mh-cbon/guess-path"
 )
 
-var TheStaticValueForBuild = ""
+var TheStaticBuildValue = ""
 
 func GuessPath() string {
   p := guesspath.Path(
-    TheStaticValueForBuild,
+    TheStaticBuildValue,
     "your/resources/",
   )
   if p == "" {
@@ -43,7 +43,7 @@ func GuessPath() string {
 
 func GuessGlob() string {
   p := guesspath.Glob(
-    Tplpath,
+    TheStaticBuildValue,
     "your/resources/",
     "*.tmpl",
   )
