@@ -41,7 +41,7 @@ func Path(
 	} else if k := runtimePath(); exists(k) {
 		return filepath.Join(k, RootPkgResPath)
 
-	} else if k := filepath.Join("vendor", PkgName); exists(k) {
+	} else if k := filepath.Join("vendor", PkgName); PkgName!="" && exists(k) {
 		return filepath.Join(k, RootPkgResPath)
 
 	}
