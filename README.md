@@ -14,6 +14,7 @@ Suppose you have a package with a resource folder located at `your/resources/`.
 The resolution is,
 - test the provided static value, if non empty, return it without further check.
 - test for a workspace path with runtime values `/runtimepath/github.com/you/yourpackage/`.
+- test for a vendored path with cwd `vendor/github.com/you/yourpackage/`.
 
 The return value is
 - exactly `TheStaticBuildValue`, if non empty
@@ -32,6 +33,7 @@ var TheStaticBuildValue = ""
 func GuessPath() string {
   p := guesspath.Path(
     TheStaticBuildValue,
+    "your/pkg/",
     "your/resources/",
   )
   if p == "" {
@@ -44,6 +46,7 @@ func GuessPath() string {
 func GuessGlob() string {
   p := guesspath.Glob(
     TheStaticBuildValue,
+    "your/pkg/",
     "your/resources/",
     "*.tmpl",
   )

@@ -14,11 +14,13 @@ func init() {
 
 func Glob(
 	staticValue string,
+	PkgName string,
 	RootPkgResPath string,
 	Glob string,
 ) string {
 	p := Path(
 		staticValue,
+		PkgName,
 		RootPkgResPath,
 	)
 	if p != "" {
@@ -29,6 +31,7 @@ func Glob(
 
 func Path(
 	staticValue string,
+	PkgName string,
 	RootPkgResPath string,
 ) string {
 
@@ -36,6 +39,9 @@ func Path(
 		return staticValue
 
 	} else if k := runtimePath(); exists(k) {
+		return filepath.Join(k, RootPkgResPath)
+
+	} else if k := filepath.Join("vendor", PkgName); exists(k) {
 		return filepath.Join(k, RootPkgResPath)
 
 	}
